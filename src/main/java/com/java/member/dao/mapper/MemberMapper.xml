@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+	<resultMap type="com.java.member.dto.MemberDto" id="memberDto"/>	
+	<resultMap type="com.java.food.dto.FoodDto" id="foodDto"/>
+	
+	<insert id="insert" parameterType="com.java.member.dto.MemberDto">
+		insert into member(member_code, member_date, member_mail, member_pwd, member_name, member_status) 
+		values('MEMBER'||LPAD(seqMember.nextval,4,0),
+		#{memberDate},
+		#{memberMail},
+		#{memberPwd},
+		#{memberName},
+		'Y'
+		)
+	</insert>
+	 
+	<select id="login" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from member where member_mail=#{mail} and member_pwd=#{pwd}
+	</select>
+	
+	<select id="getMemberCode" parameterType="String" resultType="com.java.member.dto.MemberDto">
+		SELECT * from member WHERE member_mail=#{mail}
+	</select>
+	
+	<select id="memberInfo" parameterType="String" resultMap="memberDto" >
+		select * from member where member_code = #{memberCode}
+	</select>
+
+	<insert id="insertKakao" parameterType="com.java.member.dto.MemberDto">
+		insert into member(member_code, member_mail, member_name, member_date, member_status) 
+		values('MEMBER'||LPAD(seqMember.nextval,4,0),
+		#{mail},
+		#{nickname},
+		sysdate,
+		'Y'
+		)
+	</insert>
+	
+		<insert id="insertNaver" parameterType="java.util.Map">
+		insert into member(member_code, member_mail, member_name, member_date, member_status) 
+		values('MEMBER'||LPAD(seqMember.nextval,4,0),
+		#{email},
+		#{name},
+		sysdate,
+		'Y'
+		)
+	</insert>
+	
+
+	<select id="emailCheck" parameterType="String" resultType="int" >
+		select count(*) from member where member_mail=#{mail}
+	</select>
+	
+	<update id="memberUpdate" parameterType="com.java.member.dto.MemberDto">
+		update member set member_pwd=#{memberPwd}, member_name=#{memberName}, member_phone=#{memberPhone} where member_code=#{memberCode}
+	</update>
+	
+	<insert id="foodInsert" parameterType="com.java.food.dto.FoodDto">
+		insert into food(food_code, member_code, food_name, food_addr, food_kind, food_status, food_date, food_read, food_phone)
+		values('FOOD'||LPAD(seqFood.nextval,4,0),
+		#{memberCode},
+		#{foodName},
+		#{foodAddr},
+		#{foodKind},
+		'N',
+		sysdate,
+		'0',
+		'0'
+		)
+	</insert>
+	
+	
+	<delete id="myFoodDel" parameterType="String">
+		DELETE FROM FOOD WHERE food_code = #{foodCode}
+	</delete>
+	
+	
+	<select id="getMyFood" parameterType="java.util.Map" resultType="com.java.food.dto.FoodDto">
+		SELECT * FROM FOOD WHERE member_code = #{memberCode}
+	</select>
+
+	<select id="getMyCoupon" parameterType="String" resultType="com.java.coupon.dto.CouponDto">
+		select coupon.coupon_code, coupon.food_code, coupon.coupon_name, coupon.coupon_costori, coupon.coupon_salerate, coupon.coupon_costsale, coupon.coupon_intro, coupon.coupon_status,
+		TO_CHAR(coupon.coupon_startdate, 'YYYY-MM-DD') AS coupon_startdate, TO_CHAR(coupon.coupon_enddate, 'YYYY-MM-DD') AS coupon_enddate, 
+		(select image_code from image where refer_code = coupon.coupon_code) AS image_code,
+		(select image_name from image where refer_code = coupon.coupon_code) AS image_name, 
+		(select image_path from image where refer_code = coupon.coupon_code) AS image_path,
+		(select food_name from food Where food_code = coupon.food_code) AS food_name
+		from coupon where coupon_code in (select coupon_code from purchase where member_code=#{memberCode})
+	</select>
+	
+	<!-- IMAGE_NAME 작업을 해야함 -->
+	<select id="getMyReview" parameterType="String" resultType="com.java.food.dto.FoodReviewDto">
+		SELECT REVIEW.review_code, REVIEW.food_code, REVIEW.member_code, MEMBER.member_name, REVIEW.review_date, REVIEW.review_cont, REVIEW.review_score, IMAGE.refer_code, LISTAGG(image_name, ',')WITHIN GROUP (ORDER BY image_name) AS IMAGE_NAME
+		FROM REVIEW, IMAGE, MEMBER
+		WHERE review_code = refer_code(+) AND review.member_code = member.member_code  AND member.member_code=#{memberCode}
+		GROUP BY REVIEW.review_code,  REVIEW.food_code, review.member_code, MEMBER.member_name, REVIEW.review_date, REVIEW.review_cont, REVIEW.review_score, IMAGE.refer_code
+		ORDER BY review_code DESC
+	</select>
+	
+	<select id="getMyFavorite" parameterType="String" resultType="com.java.member.dto.MemberFavoriteDto">
+        select food.food_code, food.food_area, food.food_name, food.food_read,
+        (select image_name from image where refer_code = food.food_code) AS image_name, 
+      (select image_path from image where refer_code = food.food_code) AS image_path,
+        (select count(*) from review where food_code=food.food_code) as count,
+        (select avg(review_score) from review where food_code=food.food_code) as avg
+        from food, favorite
+      where food.food_code = favorite.food_code and favorite.member_code=#{memberCode}
+    </select>
+<!--     
+	<select id="getMyFavorite" parameterType="String" resultType="com.java.member.dto.MemberFavoriteDto">
+        select food.food_code, food.food_area, food.food_name, food.food_read,
+        (select image_name from image where refer_code = food.food_code) AS image_name, 
+		(select image_path from image where refer_code = food.food_code) AS image_path,
+        (select count(*) from review where food_code=food.food_code) as count,
+        (select avg(review_score) from review where food_code=food.food_code) as avg
+        from food, favorite
+		where food.food_code = favorite.food_code and favorite.member_code=#{memberCode}
+    </select>
+     -->
+	<select id="getCouponCount" parameterType="String" resultType="String">
+		select count(*) from purchase where member_code=#{memberCode}
+	</select>
+	
+	<select id="getFavoriteCount" parameterType="String" resultType="String">
+		select count(*) from favorite where member_code=#{memberCode}
+	</select>
+	
+	<select id="getReviewCount" parameterType="String" resultType="String">
+		select count(*) from review where member_code=#{memberCode}
+	</select>
+	
+	<select id="getMember" parameterType="com.java.member.dto.MemberDto" resultType="com.java.member.dto.MemberDto">
+		select * from member	
+	</select>
+	
+	<update id="adminUpdate" parameterType="com.java.member.dto.MemberDto">
+		update member set member_status=#{memberStatus}, member_name=#{memberName}, member_phone=#{memberPhone} where member_code=#{memberCode}
+	</update>
+	
+	<select id="loginCheck" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM ADMIN WHERE admin_id = #{adminId} AND admin_pwd = #{adminPwd}
+	</select>
+	
+</mapper>
