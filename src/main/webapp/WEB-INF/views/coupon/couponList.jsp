@@ -162,7 +162,7 @@
 			console.log(data);
 			console.log("length:" + data.length);
 			var root = "${root}";
-			var err = root + "/resources/css/list.jpg";
+			var err = root + "/resources/css/noimage.jpg";
 			for (var i = 0; i < data.length; i++) {
 				var foodCode = "${root}/coupon/couponRead.go?couponCode="
 						+ data[i].couponCode + "&&pageNumber=1";

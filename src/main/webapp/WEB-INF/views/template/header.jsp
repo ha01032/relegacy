@@ -78,7 +78,7 @@
 	display: flex;
 }
 .nav_1 > a{
-	color: #EFB730;
+	color: #30dcef	;
 }
 
 
@@ -87,17 +87,17 @@
     font-size: 23px;
     margin-left: 10px;
     /* padding-left: 20px; */
-    color: #EFB730;
+    color: #30dcef;
     font-family: 'Noto Sans KR';
     margin-left: 34px;
     border: none;
-	border-bottom: 2px solid #EFB730;
+	border-bottom: 2px solid #30dcef;
 }
 .nav_1 > input::placeholder, .nav_1 > input::-webkit-input-placeholder {
 	font-size: 23px;
 	font-family: Noto Sans KR;
 	font-weight: 500;
-	color: #EFB730;
+	color: #30dcef;
 }
 .nav_2 > a {
 	margin-left: 20px;
@@ -316,10 +316,10 @@
 </style>
 	<div id="header">
 		<div class="nav_1">
-			<a href="${root}/index.jsp"><span>E</span><span>A</span><span>T</span>          <span>T</span><span>H</span><span>E</span>          <span>J</span><span>E</span><span>J</span><span>U</span></a>
+			<a href="${root}/index.jsp"><span>E</span><span>A</span><span>T</span>          <span>T</span><span>H</span><span>E</span>          <span>B</span><span>U</span><span>S</span><span>A</span><span>N</span></a>
 			<input type="text" id="searchInput" name="searchInput" placeholder="검색어를 입력하여 주세요"  autofocus />
 		</div>
-		<div class="nav_2">
+		<div class="nav_2" >
 			<c:choose>
 				<c:when test="${memberCode == null }">
 						<a href="#" id="loginClick">로그인</a>
@@ -329,7 +329,7 @@
 						<a href="${root}/member/myPage.go">마이페이지</a>
 				</c:when>
 			</c:choose>
-			<a href="${root}/coupon/couponList.go">EAT딜</a>
+			<a href="${root}/coupon/couponList.go">쿠폰마켓</a>
 			<a href="${root}/food/list.go">맛집리스트</a>
 		</div>
 	</div>
@@ -341,7 +341,7 @@
 				<span>로그인</span><span class="close">&times;</span>
 			</div>
 			<div class="login">
-				<img alt="로고" src="${root}/resources/css/jeju.png">
+				<img alt="로고" src="${root}/resources/css/login.png">
 				<button id="emailClick">이메일 로그인</button>
 				<button onclick="loginForm()">카카오 로그인</button>
 				<button onclick="location.href='${url}'" id="naver_id_login" >네이버 로그인</button>

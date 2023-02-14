@@ -546,7 +546,7 @@
 						<c:forEach var="couponDto" items="${couponDtoList}" varStatus="status" >
 							<div class="cp_mySlides fade">
 								<a href="${root}/coupon/couponRead.go?couponCode=${couponDto.couponCode}&pageNumber=1">
-								<img alt="쿠폰이미지" src="/jeju/resources/ftp/${couponDto.imageName}" onerror="this.src='${root}/resources/css/list.jpg'">
+								<img alt="쿠폰이미지" src="/jeju/resources/ftp/${couponDto.imageName}" onerror="this.src='${root}/resources/css/noimage.jpg'">
 								<span class="couponCouponName"> ${couponDto.couponName}</span>
 								<span class="couponSalerate"> ${couponDto.couponSalerate}%</span> 
 								<span class="couponCostsale"> ${couponDto.couponCostsale}원</span>
@@ -593,12 +593,12 @@
 										<div class="reviewImg">
 											<c:set var="img" value="${fn:split(foodReviewDto.imageName,',')}" />
 											<c:forEach var="imgList" items="${img}">
-												<img src="/jeju/resources/ftp/${imgList}" alt="이미지" onerror="this.src='${root}/resources/css/list.jpg'"/>
+												<img src="/jeju/resources/ftp/${imgList}" alt="이미지" onerror="this.src='${root}/resources/css/noimage.jpg'"/>
 												<!-- 
 													
 													src="C:/Spring/workspace/image/${foodReviewDto.imageName}"
 													src="/img/${imgList}"
-													onerror="this.src='${root}/resources/css/list.jpg'"
+													onerror="this.src='${root}/resources/css/noimage.jpg'"
 												 -->
 											</c:forEach>
 										</div>							
@@ -641,10 +641,10 @@
 				<c:choose>
 					<c:when test="${foodDto.foodStatus == 'Y'}">
 						<img src="/jeju/resources/ftp/${imageDto.imageName}" alt="이미지"
-							 onerror="this.src='${root}/resources/css/list.jpg'" />
+							 onerror="this.src='${root}/resources/css/noimage.jpg'" />
 					</c:when>
 					<c:when test="${foodDto.foodStatus != 'N'}">
-						<img alt="이미지 검토중" src="${root}/resources/css/list.jpg'">
+						<img alt="이미지 검토중" src="${root}/resources/css/noimage.jpg'">
 					</c:when>
 				</c:choose>
 			</div>

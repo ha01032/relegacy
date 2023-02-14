@@ -33,7 +33,7 @@ public class SearchServiceImp implements SearchService {
 		if (keyword == null) {
 			keyword = "";
 		}
-		
+		System.out.println("================" + keyword);
 		// 쿠폰 수
 		int couponCount = searchDao.couponCount(keyword);
 		JejuAspect.logger.info(JejuAspect.logMsg + couponCount);
@@ -128,7 +128,6 @@ public class SearchServiceImp implements SearchService {
 		String keyword = (String) map.get("keyword");
 		String addrType = (String) map.get("addrType");
 		String kindType = (String) map.get("kindType");
-		
 		String[] addrArr = null;
 		String[] kindArr = null;
 		if (addrType != null) {

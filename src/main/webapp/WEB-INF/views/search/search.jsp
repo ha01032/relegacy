@@ -447,8 +447,8 @@ label {
 			<c:if test="${couponCount > 0}">
 			<c:forEach var="couponDto" items="${couponList}" begin="0" step="1" end="5">
 			<div id="inner" class="couponList" style="cursor:pointer;" onclick="location.href='${root}/food/read.go?foodCode=${couponDto.foodCode}'">
-				<div style="background-image: url('${root}/resources/ftp/${couponDto.imageName}'), url('${root}/resources/css/list.jpg');">
-					<img alt="쿠폰 이미지" src="${path}${couponDto.imageName}" onerror="this.src='${root}/resources/css/list.jpg'">
+				<div style="background-image: url('${root}/resources/ftp/${couponDto.imageName}'), url('${root}/resources/css/noimage.jpg');">
+					<img alt="쿠폰 이미지" src="${path}${couponDto.imageName}" onerror="this.src='${root}/resources/css/noimage.jpg'">
 					<span>${couponDto.couponCostsale}</span>
 					<span>${couponDto.couponName}</span>
 				</div>
@@ -463,7 +463,7 @@ label {
 			<c:forEach var="couponDto" items="${couponList}" begin="0" step="1" end="5">
 			<div id="inner" class="couponList" style="cursor:pointer;" onclick="location.href='${root}/food/read.go?foodCode=${couponDto.foodCode}'">
 				<div>
-					<img alt="쿠폰 이미지" src="/jeju/resources/ftp/${couponDto.imageName}" onerror="this.src='${root}/resources/css/list.jpg'"> 
+					<img alt="쿠폰 이미지" src="/jeju/resources/ftp/${couponDto.imageName}" onerror="this.src='${root}/resources/css/noimage.jpg'"> 
 					<span>${couponDto.couponName}</span>
 				</div>
 				<div>
@@ -651,7 +651,7 @@ function searchResultAjax() {
 					cont += "<div class='list' style='cursor:pointer;' onclick='location.href=\""+url+"\"'>";
 					// onclick='location.href=\""+url+"\"'>"; -> 해당 foodcode 음식점으로 이동
 						cont += "<div>";
-							var err = root + "/resources/css/list.jpg";
+							var err = root + "/resources/css/noimage.jpg";
 							// 이미지 없을때
 							cont += "<img alt='음식 이미지' src='/jeju/resources/ftp/"+data[i].imageName+"' onerror='this.src=\""+err+"\"'>";
 						cont += "</div>";

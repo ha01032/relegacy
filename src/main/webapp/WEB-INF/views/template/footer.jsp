@@ -22,7 +22,7 @@
 	display: block;
 	font-size: 1.5rem;
 	font-weight: bold;
-	color: #EFB730;
+	color: #30dcef;
 	margin-bottom: 10px;
 }
 .foo_1 p {

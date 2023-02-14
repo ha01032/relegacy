@@ -100,7 +100,7 @@ a {
 					step="1">
 					<div class="eat">
 						<div class="info_1">
-							<img alt="쿠폰이미지" src="list.jpg">
+							<img alt="쿠폰이미지" src="noimage.jpg">
 						</div>
 						<div class="info_2">
 							<div>

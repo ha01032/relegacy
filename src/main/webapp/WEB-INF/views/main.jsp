@@ -9,7 +9,7 @@
 	
 }
 #img_wrapper {
-  background-image: url(${root}/resources/css/food_1.jpg);
+  background-image: url(${root}/resources/css/pusan.jpg);
   height: 40vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -35,7 +35,7 @@
 	flex-wrap: wrap;
 	margin: 50px 0;
 	text-align: center;
-    color: #EFB730;
+    color: #30dcef;
     font-size: 18px;
     background: #F7F7F7;
     padding: 20px 0px;
@@ -88,12 +88,12 @@
 	display: flex;
 }
 .con_3 > div:first-child {
-	border-bottom: solid 2px #EFB730;
+	border-bottom: solid 2px #30dcef;
 	font-size: 23px;
 }
 
 .con_3 > div:first-child span{
-	color: #EFB730;
+	color: #30dcef;
 	line-height: 40px;
 }
 
@@ -215,7 +215,7 @@ function popularFood() {
 			for (var i = 0; i < data.length; i++) {
 				var url = root + "/food/read.go?foodCode=" + data[i].foodCode;
 				cont += "<div style='cursor:pointer;' onclick='location.href=\""+url+"\"'>";
-					var err = root + "/resources/css/list.jpg";
+					var err = root + "/resources/css/noimage.jpg";
 					cont += "<img alt='음식 이미지' src='"+root+"/resources/ftp/"+data[i].imageName+"' onerror='this.src=\""+err+"\"'>";
 					cont += "<span class='foodName'>음식점명 : "+data[i].foodName+"</span>";
 					cont += "<div class='foodInfo'>"
@@ -249,8 +249,8 @@ function countCont() {
 		dataType : "json",
 		success : function(data) {
 			var cont = "";
-			cont += "<span>EAT THE JEJU<br/>둘러보기</span>"
-			cont += "<span>EAT THE JEJU에 등록된   "+data.countFood+"여 개의 맛집과   "+data.countReview+"여 개의 리뷰를 통해 <br/>다양한 맛집을 경험해 보세요.</span>"
+			cont += "<span>EAT THE BUSAN<br/>둘러보기</span>"
+			cont += "<span>EAT THE BUSAN에 등록된   "+data.countFood+"여 개의 맛집과   "+data.countReview+"여 개의 리뷰를 통해 <br/>다양한 맛집을 경험해 보세요.</span>"
 			$(".search").html(cont);	
 		}
 	});

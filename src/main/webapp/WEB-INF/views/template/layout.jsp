@@ -111,7 +111,7 @@ ol, ul, a {
 	color: #030305;
 }
 a {
-	color: #EFB730;
+	color: #30dcef;
 }
 button {
 	color: #FFFFFF;

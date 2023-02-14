@@ -210,7 +210,7 @@ function updateList() {
 		dataType : "json",
 		success : function (data) {
 			var cont = "";
-			var image = "${root}/resources/css/list.jpg";
+			var image = "${root}/resources/css/noimage.jpg";
 			for (var i = 0; i < data.length; i++) {
 				var foodCode = "${root}/food/read.go?foodCode="+data[i].foodCode;
 				/* cont += "<div style='background-image: url(" + data[i].imagePath + ")'>";
@@ -219,7 +219,7 @@ function updateList() {
 				
 				cont += "<div style='cursor: pointer;' onclick="+"'location.href=\""+foodCode+"\"'>";
 					cont += "<div>";
-						var err = root + "/resources/css/list.jpg";
+						var err = root + "/resources/css/noimage.jpg";
 						cont += "<img alt='음식 이미지' src='"+root+"/resources/ftp/"+data[i].imageName+"' onerror='this.src=\""+err+"\"'>";
 					cont += "</div>";
 					cont += "<div>";

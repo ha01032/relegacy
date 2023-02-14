@@ -110,6 +110,9 @@ public class MemberServiceImp implements MemberService{
 		
 		String nickname = request.getParameter("nickname");
 		String mail = request.getParameter("mail");
+		
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + nickname + "--------------------" + mail);
+		
 		JejuAspect.logger.info(JejuAspect.logMsg + mail);
 		// DB 저장하기전에 카카오에서 주는 mail값으로 현재 DB에 있는지 체크한다.
 		int emailCheck = memberDao.emailCheck(mail);
